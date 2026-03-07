@@ -184,8 +184,8 @@ export default function App() {
 
   // ── Lobby ──────────────────────────────────────────────────────────────────
   if (screen === 'lobby') return (
-    <div style={{ minHeight: '100vh', background: '#1a472a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif' }}>
-      <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 16, padding: 32, width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
+    <div style={{ minHeight: '100vh', background: '#1a472a', display: 'flex', alignItems: 'center', fontFamily: 'sans-serif', padding: 16 }}>
+      <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 16, padding: 32, width: '100%', boxSizing: 'border-box' }}>
         <h2 style={{ color: '#fff', marginBottom: 24, textAlign: 'center' }}>🃏 Card Table</h2>
 
         <label style={{ color: '#fff', fontSize: 14 }}>Your name</label>
