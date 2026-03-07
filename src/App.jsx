@@ -13,7 +13,7 @@ function Card({ card, selected, onClick, faceDown, draggable, onDragStart, onDra
       onDragOver={e => { e.preventDefault(); onDragOver?.(); }}
       onDrop={onDrop}
       style={{
-      width: 60, height: 90, borderRadius: 8,
+      width: 45, height: 68, borderRadius: 8,
       border: selected ? '2px solid #4f8ef7' : '2px solid #ccc',
       background: faceDown ? '#2c5f8a' : 'white',
       display: 'flex', flexDirection: 'column',
@@ -275,7 +275,7 @@ export default function App() {
   // ── Game ───────────────────────────────────────────────────────────────────
   return (
     <div style={{ minHeight: '100vh', background: '#1a472a', fontFamily: 'sans-serif', padding: 24 }}>
-      <div style={{ maxWidth: 700, margin: '0 auto' }}>
+      <div style={{ maxWidth: '100%'}}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <h2 style={{ color: '#fff', margin: 0 }}>🃏 Card Table</h2>
           <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>Room: {roomCode}</span>
