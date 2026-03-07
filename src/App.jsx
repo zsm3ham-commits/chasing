@@ -275,7 +275,7 @@ export default function App() {
   // ── Game ───────────────────────────────────────────────────────────────────
   return (
     <div style={{ minHeight: '100vh', background: '#1a472a', fontFamily: 'sans-serif', padding: 24 }}>
-      <div style={{ maxWidth: 900, margin: '0 auto'}}>
+      <div style={{ maxWidth: '100%'}}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <h2 style={{ color: '#fff', margin: 0 }}>🃏 Card Table</h2>
           <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>Room: {roomCode}</span>
