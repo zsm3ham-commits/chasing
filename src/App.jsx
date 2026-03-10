@@ -148,6 +148,7 @@ export default function App() {
       socket.off('player-assigned');
       socket.off('waiting');
       socket.off('error');
+      socket.off('reconnect');
     };
   }, []);
 
