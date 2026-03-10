@@ -133,14 +133,14 @@ export default function App() {
     socket.on('error', (msg) => {
       setError(msg);
     });
-    socket.on('reconnect', () => {
-        if (savedRoom.roomCode && savedRoom.playerIndex !== null) {
-            socket.emit('rejoin-room', {
-                roomCode: savedRoom.roomCode,
-                playerIndex: savedRoom.playerIndex
-            });
-        }
-    });
+    socket.io.on('reconnect', () => {
+    if (savedRoom.roomCode && savedRoom.playerIndex !== null) {
+        socket.emit('rejoin-room', {
+            roomCode: savedRoom.roomCode,
+            playerIndex: savedRoom.playerIndex
+        });
+    }
+});
 
     return () => {
       socket.off('game-state');
@@ -148,7 +148,7 @@ export default function App() {
       socket.off('player-assigned');
       socket.off('waiting');
       socket.off('error');
-      socket.off('reconnect');
+      socket.io.off('reconnect');
     };
   }, []);
 
