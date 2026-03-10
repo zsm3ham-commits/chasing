@@ -134,6 +134,7 @@ export default function App() {
       setError(msg);
     });
     socket.io.on('reconnect', () => {
+      console.log('reconnected! savedRoom:', savedRoom);
     if (savedRoom.roomCode && savedRoom.playerIndex !== null) {
         socket.emit('rejoin-room', {
             roomCode: savedRoom.roomCode,
