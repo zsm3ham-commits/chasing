@@ -296,7 +296,7 @@ export default function App() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <h2 style={{ color: '#fff', margin: 0 }}>🃏 Card Table</h2>
           <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>Room: {roomCode}</span>
-          <button onClick={() => leaveGame} style={{
+          <button onClick={leaveGame} style={{
             padding: '8px 16px', borderRadius: 8, background: 'rgba(255,255,255,0.15)',
             color: '#fff', border: 'none', cursor: 'pointer'
           }}>Leave</button>
