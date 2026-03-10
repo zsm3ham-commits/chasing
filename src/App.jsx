@@ -142,6 +142,11 @@ export default function App() {
         });
     }
 });
+socket.on('rejoin-success', ({ playerIndex, roomCode }) => {
+    setMyPlayerIndex(playerIndex);
+    setRoomCode(roomCode);
+    setScreen('game');
+});
 
     return () => {
       socket.off('game-state');
@@ -150,6 +155,7 @@ export default function App() {
       socket.off('waiting');
       socket.off('error');
       socket.off('connect');
+      socket.off('rejoin-success');
     };
   }, []);
 

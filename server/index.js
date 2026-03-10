@@ -333,10 +333,16 @@ io.on('connection', (socket) => {
     console.log('rejoin attempt:', roomCode, playerIndex);
     const room = rooms[roomCode];
     if (!room || !room.state) {
-        console.log('room not found');
         socket.emit('error', 'Game no longer exists');
         return;
-    }});
+    }
+    room.socketIds[playerIndex] = socket.id;
+    socket.join(roomCode);
+    socket.roomCode = roomCode;
+    socket.playerIndex = playerIndex;
+    socket.emit('rejoin-success', { playerIndex, roomCode });
+    socket.emit('game-state', room.state);
+});
     socket.on('disconnect', () => {
         console.log('Player disconnected:', socket.id);
     });
