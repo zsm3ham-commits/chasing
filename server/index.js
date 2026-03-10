@@ -333,6 +333,14 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('Player disconnected:', socket.id);
     });
+    socket.on('rejoin-room', ({ roomCode, playerIndex }) => {
+    console.log('rejoin attempt:', roomCode, playerIndex);
+    const room = rooms[roomCode];
+    if (!room || !room.state) {
+        console.log('room not found');
+        socket.emit('error', 'Game no longer exists');
+        return;
+    }
 });
 
 server.listen(3001, () => {
