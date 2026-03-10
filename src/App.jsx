@@ -133,7 +133,7 @@ export default function App() {
     socket.on('error', (msg) => {
       setError(msg);
     });
-    socket.on('connect', () => {
+    socket.on('reconnect', () => {
         if (savedRoom.roomCode && savedRoom.playerIndex !== null) {
             socket.emit('rejoin-room', {
                 roomCode: savedRoom.roomCode,
