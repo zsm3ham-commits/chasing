@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import socket from './socket';
-
+let savedRoom = { roomCode: null, playerIndex: null };
 const RED_SUITS = ['♥', '♦'];
 const VALID_COUNTS = [1, 2, 3, 5];
 
@@ -118,10 +118,13 @@ export default function App() {
       socket.emit('join-room', { roomCode, playerName: myNameRef.current });
     });
 
-    socket.on('player-assigned', ({ playerIndex }) => {
-      setMyPlayerIndex(playerIndex);
-      setScreen('waiting');
-    });
+    socket.on('player-assigned', ({ playerIndex, roomCode }) => {
+    setMyPlayerIndex(playerIndex);
+    setRoomCode(roomCode);
+    setScreen('waiting');
+    savedRoom.roomCode = roomCode;
+    savedRoom.playerIndex = playerIndex;
+});
 
     socket.on('waiting', ({ joined, total, players }) => {
       setWaiting({ joined, total, players });
@@ -129,6 +132,14 @@ export default function App() {
 
     socket.on('error', (msg) => {
       setError(msg);
+    });
+    socket.on('connect', () => {
+        if (savedRoom.roomCode && savedRoom.playerIndex !== null) {
+            socket.emit('rejoin-room', {
+                roomCode: savedRoom.roomCode,
+                playerIndex: savedRoom.playerIndex
+            });
+        }
     });
 
     return () => {
@@ -179,6 +190,11 @@ export default function App() {
   function reorderHand(playerIndex, fromIndex, toIndex) {
     socket.emit('reorder-hand', { playerIndex, fromIndex, toIndex });
   }
+  function leaveGame() {
+    savedRoom.roomCode = null;
+    savedRoom.playerIndex = null;
+    setScreen('lobby');
+}
 
   const isMyTurn = myPlayerIndex === currentTurn;
 
@@ -279,7 +295,7 @@ export default function App() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <h2 style={{ color: '#fff', margin: 0 }}>🃏 Card Table</h2>
           <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>Room: {roomCode}</span>
-          <button onClick={() => setScreen('lobby')} style={{
+          <button onClick={() => leaveGame} style={{
             padding: '8px 16px', borderRadius: 8, background: 'rgba(255,255,255,0.15)',
             color: '#fff', border: 'none', cursor: 'pointer'
           }}>Leave</button>
