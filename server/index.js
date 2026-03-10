@@ -329,10 +329,6 @@ io.on('connection', (socket) => {
         state.players[playerIndex].hand = hand;
         socket.emit('game-state', state);
     });
-
-    socket.on('disconnect', () => {
-        console.log('Player disconnected:', socket.id);
-    });
     socket.on('rejoin-room', ({ roomCode, playerIndex }) => {
     console.log('rejoin attempt:', roomCode, playerIndex);
     const room = rooms[roomCode];
@@ -340,7 +336,11 @@ io.on('connection', (socket) => {
         console.log('room not found');
         socket.emit('error', 'Game no longer exists');
         return;
-    }
+    }});
+    socket.on('disconnect', () => {
+        console.log('Player disconnected:', socket.id);
+    });
+    
 });
 
 server.listen(3001, () => {
