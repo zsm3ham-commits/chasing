@@ -133,8 +133,8 @@ export default function App() {
     socket.on('error', (msg) => {
       setError(msg);
     });
-    socket.io.on('reconnect', () => {
-      console.log('reconnected! savedRoom:', savedRoom);
+    socket.on('connect', () => {
+    console.log('connected/reconnected! savedRoom:', savedRoom);
     if (savedRoom.roomCode && savedRoom.playerIndex !== null) {
         socket.emit('rejoin-room', {
             roomCode: savedRoom.roomCode,
@@ -149,7 +149,7 @@ export default function App() {
       socket.off('player-assigned');
       socket.off('waiting');
       socket.off('error');
-      socket.io.off('reconnect');
+      socket.off('connect');
     };
   }, []);
 
