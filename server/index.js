@@ -141,7 +141,15 @@ function createInitialState(playerNames) {
             hands[i].push(deckCopy.shift());
         }
     }
-    const players = playerNames.map((name, i) => ({ name, hand: hands[i]}));
+    const players = playerNames.map((name, i) => ({ 
+        name, 
+        hand: [...hands[i]].sort((a, b) => {
+            const rankDiff = RANK_ORDER.indexOf(a.rank) - RANK_ORDER.indexOf(b.rank);
+            if (rankDiff !== 0) return rankDiff;
+            return SUIT_ORDER.indexOf(a.suit) - SUIT_ORDER.indexOf(b.suit);
+        })
+    }));
+
     let startingPlayer = 0;
     for (const [i, player] of players.entries()) {
         for (const card of player.hand) {
