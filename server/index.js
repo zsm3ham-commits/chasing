@@ -35,14 +35,7 @@ function shuffle(deck) {
     }
     return d;
 }
-function sortHand(hand){
-    return [...hand].sort((a,b)=>{
-        const RankDiff = RANK_ORDER.IndexOf(a.rank) - RANK_ORDER.IndexOf(b.rank);
-        if (RankDiff !== 0) return RankDiff;
-        return SUIT_ORDER.indexOf(a.suit)- SUIT_ORDER.IndexOf(b.suit);
 
-    })
-}
 
 function getHandValue(selectedCards) {
     let highestCard = selectedCards[0];
@@ -148,7 +141,7 @@ function createInitialState(playerNames) {
             hands[i].push(deckCopy.shift());
         }
     }
-    const players = playerNames.map((name, i) => ({ name, hand: sortHand(hands[i])}));
+    const players = playerNames.map((name, i) => ({ name, hand: hands[i]}));
     let startingPlayer = 0;
     for (const [i, player] of players.entries()) {
         for (const card of player.hand) {
