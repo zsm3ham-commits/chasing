@@ -36,7 +36,7 @@ function shuffle(deck) {
     return d;
 }
 function sortHand(hand){
-    return hand.sort((a,b)=>{
+    return [...hand].sort((a,b)=>{
         const RankDiff = RANK_ORDER.IndexOf(a.rank) - RANK_ORDER.IndexOf(b.rank);
         if (RankDiff !== 0) return RankDiff;
         return SUIT_ORDER.indexOf(a.suit)- SUIT_ORDER.IndexOf(b.suit);
